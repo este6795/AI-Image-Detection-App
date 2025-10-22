@@ -1,47 +1,19 @@
 const express = require('express');
 const cors = require('cors');
-
-// /workspaces/AI-Image-Detection-App/Backend/server.js
-
 const app = express();
 
-app.use(cors());
+// Middleware
+app.use(cors()); // Allows frontend to access backend
 app.use(express.json());
+const products = [
+    { id: 1, name: 'Coffee Beans', qty: 25, price: 8.0 },
+    { id: 2, name: 'Tea Bags', qty: 50, price: 5.0 }
+];
 
-// Root
-app.get('/', (req, res) => {
-    res.json({ message: 'AI Image Detection Backend', version: '0.1.0' });
-});
 
-// Health check
-app.get('/health', (req, res) => {
-    res.json({ status: 'ok', uptime: process.uptime() });
-});
+app.get('/api/ping', (req, res) => res.json({ ok: true })); // to test connection
 
-// Dummy detect endpoint
-// Expects JSON: { "imageUrl": "https://..." }
-app.post('/detect', (req, res) => {
-    const { imageUrl } = req.body;
-    if (!imageUrl) {
-        return res.status(400).json({ error: 'imageUrl is required' });
-    }
+app.get('/api/products', (req, res) => res.json(products));
 
-    // Placeholder detection result
-    const detection = {
-        imageUrl,
-        detections: [
-            { label: 'person', confidence: 0.98, bbox: [120, 45, 220, 340] },
-            { label: 'dog', confidence: 0.87, bbox: [320, 120, 420, 300] }
-        ],
-        processedAt: new Date().toISOString()
-    };
-
-    res.json({ ok: true, detection });
-});
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-});
-
-module.exports = app;
+const PORT = process.env.PORT || 5000; // use .env file environment variables
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));
