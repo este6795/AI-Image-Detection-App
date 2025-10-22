@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/products")
+        fetch("http://localhost:5000/api/products")
         .then((response) => response.json()) 
         .then((data) => setProducts(data))
         .catch((error) => console.error("Error fetching products:", error));
