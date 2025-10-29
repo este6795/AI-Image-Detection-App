@@ -20,3 +20,6 @@ Here are few things to consider:
 - 1-incorporating MongoDB database, for example to store images, results, etc.
 
 - 2-Add access and add user management (signup, signin, add, update, delete) and use the database for that. Assuming the app can be used by multiple users and each user need to signup to use the app.
+
+## Notes
+- We will be using Sightengine's API so credit to them https://sightengine.com/
