@@ -8,7 +8,7 @@ function ImageDetector() {
     const formData = new FormData();
     formData.append("image", file);
 
-    const res = await fetch("http://localhost:3000/detect", {
+    const res = await fetch("http://localhost:5000/detect", {
       method: "POST",
       body: formData,
     });

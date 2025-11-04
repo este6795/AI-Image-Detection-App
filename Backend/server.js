@@ -5,6 +5,7 @@ import FormData from "form-data";
 import fs from "fs";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ mongoose.connect(process.env.MONGO_URI)
   .catch((err) => console.error("MongoDB connection error:", err));
 
 const app = express();
+app.use(cors());
 const upload = multer({ dest: "uploads/" });
 
 app.post("/detect", upload.single("image"), async (req, res) => {
@@ -42,4 +44,5 @@ app.post("/detect", upload.single("image"), async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
