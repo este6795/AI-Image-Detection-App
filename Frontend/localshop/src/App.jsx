@@ -1,9 +1,10 @@
 import './App.css'
-import ProductList from './components/ProductList'
+import ImageDetector from './components/ImageDetector'
+
 function App() {
 return (
 <div className="App">
-<ProductList />
+    <ImageDetector/>
 </div>
 )
 }

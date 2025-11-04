@@ -1,28 +1,48 @@
-const express = require('express');
-const cors = require('cors');
+// server.js or routes/detect.js
+import express from "express";
+import multer from "multer";
+import axios from "axios";
+import FormData from "form-data";
+import fs from "fs";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch((err) => console.error("MongoDB connection error:", err));
+
+dotenv.config();
 const app = express();
+const upload = multer({ dest: "uploads/" });
 
-app.use(cors());
-app.use(express.json());
+app.post("/detect", upload.single("image"), async (req, res) => {
+  try {
+    const form = new FormData();
+    form.append("media", fs.createReadStream(req.file.path));
+    form.append("models", "genai"); // Sightengine model for AI detection
+    form.append("api_user", process.env.API_USER);
+    form.append("api_secret", process.env.API_SECRET);
 
-// request logger to confirm incoming requests and paths
-app.use((req, res, next) => {
-  console.log(new Date().toISOString(), req.method, req.originalUrl);
-  next();
+    const response = await axios.post(
+      "https://api.sightengine.com/1.0/check.json",
+      form,
+      { headers: form.getHeaders() }
+    );
+
+    // Clean up temporary upload
+    fs.unlinkSync(req.file.path);
+
+    res.json({
+      success: true,
+      data: response.data,
+    });
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    res.status(500).json({ success: false, error: "Image analysis failed" });
+  }
 });
 
-const products = [
-  { id: 1, name: 'Coffee Beans', qty: 25, price: 8.0 },
-  { id: 2, name: 'Tea Bags', qty: 50, price: 5.0 }
-];
-
-app.get('/api/ping', (req, res) => res.json({ ok: true }));
-app.get('/api/products', (req, res) => res.json(products));
-
-// bind to 0.0.0.0 so devcontainer/host can reach it
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-
-module.exports = app;
+app.listen(3000, () => console.log("Server running on port 3000"));
