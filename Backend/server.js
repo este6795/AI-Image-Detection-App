@@ -1,4 +1,3 @@
-// server.js or routes/detect.js
 import express from "express";
 import multer from "multer";
 import axios from "axios";
@@ -13,7 +12,6 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-dotenv.config();
 const app = express();
 const upload = multer({ dest: "uploads/" });
 
