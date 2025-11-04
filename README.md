@@ -26,4 +26,6 @@ Here are few things to consider:
 
 
 ## Updates 
-- 11/14 Simple AI image dectection requests should be working, however we need to process output properly. Moreover, we need to identify what API parameters are (what files/files sizes are supported)
+- 10/22/25 Repo is created and has a placeholder functional product list web app
+- 10/29/25 API for image dectection was found and the provided node.js connection file has been added to repo
+- 11/14/25 Simple AI image dectection requests should be working, however we need to process output properly. Moreover, we need to identify what API parameters are (what files/files sizes are supported)
