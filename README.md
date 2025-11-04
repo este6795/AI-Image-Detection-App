@@ -23,3 +23,7 @@ Here are few things to consider:
 
 ## Notes
 - We will be using Sightengine's API so credit to them https://sightengine.com/
+
+
+## Updates 
+- 11/14 Simple AI image dectection requests should be working, however we need to process output properly. Moreover, we need to identify what API parameters are (what files/files sizes are supported)
