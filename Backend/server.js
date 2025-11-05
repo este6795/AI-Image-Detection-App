@@ -6,8 +6,12 @@ import FormData from "form-data";
 import axios from "axios";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import ImageResult from "./src/models/ImageResults.js"; // adjust if path differs
+import ImageResult from "./src/models/ImageResults.js";
 import cors from "cors";
+import { clearUploadsFolder } from "./src/models/cleanup.js";
+
+//Clean up any tempory files on server start
+clearUploadsFolder();
 
 dotenv.config();
 
