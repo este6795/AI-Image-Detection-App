@@ -65,7 +65,7 @@ app.post("/detect", upload.single("image"), async (req, res) => {
   } catch (error) {
     console.error("❌ Error analyzing image:", error.response?.data || error.message);
     res.status(500).json({ success: false, error: "Image analysis failed" });
-  }
+  } 
 });
 
 // GET /history - Retrieve previous uploads
