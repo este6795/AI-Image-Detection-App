@@ -3,6 +3,7 @@ import ImageDetector from "./components/ImageDetector";
 import ShowHistory from "./components/ShowHistory";
 import "./App.css"; // make sure this is imported
 
+
 const App = () => {
   const [showHistory, setShowHistory] = useState(false);
 
