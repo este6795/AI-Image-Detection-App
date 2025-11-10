@@ -41,7 +41,7 @@ const ShowHistory = () => {
               key={item._id}
               style={{
                 marginBottom: "20px",
-                backgroundColor: "#f8f8f8",
+                backgroundColor: "#1e1e1eff",
                 borderRadius: "10px",
                 padding: "10px",
                 boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
