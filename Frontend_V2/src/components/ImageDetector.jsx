@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./ImageDetector.css";
 
 const ImageDetector = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -13,7 +14,7 @@ const ImageDetector = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!selectedFile) return alert("Please select an image first");
+    if (!selectedFile) return alert("Select an image first.");
 
     const formData = new FormData();
     formData.append("image", selectedFile);
@@ -25,8 +26,8 @@ const ImageDetector = () => {
       });
       setResult(res.data.result);
     } catch (err) {
-      console.error(err);
-      alert("Failed to analyze image");
+      alert("Error analyzing image.");
+      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -34,7 +35,7 @@ const ImageDetector = () => {
 
   const getConfidenceText = (res) => {
     const aiScore = res?.type?.ai_generated ?? null;
-    if (aiScore === null) return "No data available";
+    if (aiScore === null) return "No data";
 
     const confidence = (1 - aiScore) * 100;
     return aiScore < 0.5
@@ -43,30 +44,38 @@ const ImageDetector = () => {
   };
 
   return (
-    <div style={{ textAlign: "center", padding: "20px", maxWidth: "700px", margin: "auto" }}>
-      <h1>🧠 AI Image Detector</h1>
+    <div className="detector-wrapper">
+      
+      <div className="detector-header">
+        <h1 className="detector-title">AI Image Authenticity Checker</h1>
+        <p className="detector-subtitle">
+          Analyze any image with high-accuracy machine intelligence.
+        </p>
+      </div>
 
-      <form onSubmit={handleSubmit}>
-        <input type="file" onChange={handleFileChange} accept="image/*" />
-        <button type="submit" disabled={loading} style={{ marginLeft: "10px" }}>
-          {loading ? "Analyzing..." : "Upload & Detect"}
-        </button>
-      </form>
+      <div className="detector-card">
 
-      {selectedFile && (
-        <div style={{ marginTop: "20px" }}>
-          <img
-            src={URL.createObjectURL(selectedFile)}
-            alt="preview"
-            style={{ maxWidth: "100%", borderRadius: "8px", marginBottom: "10px" }}
-          />
-          {result && (
-            <h3 style={{ color: result?.type?.ai_generated > 0.5 ? "red" : "green" }}>
-              {getConfidenceText(result)}
-            </h3>
-          )}
-        </div>
-      )}
+        <form onSubmit={handleSubmit} className="detector-form">
+          <label className="upload-label">
+            <span>Select Image</span>
+            <input type="file" accept="image/*" onChange={handleFileChange} />
+          </label>
+
+          <button type="submit" className="detect-btn" disabled={loading}>
+            {loading ? "Analyzing..." : "Detect Image"}
+          </button>
+        </form>
+
+        {selectedFile && (
+          <div className="preview-box">
+            <img src={URL.createObjectURL(selectedFile)} alt="preview" />
+            {result && (
+              <h3 className="result-output">{getConfidenceText(result)}</h3>
+            )}
+          </div>
+        )}
+      </div>
+
     </div>
   );
 };

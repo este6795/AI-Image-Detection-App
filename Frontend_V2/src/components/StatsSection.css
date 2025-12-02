@@ -1,0 +1,48 @@
+.stats-section {
+    padding: 40px 20px;
+    border-left: 5px solid #00ffea;
+    background: linear-gradient(135deg, #111 0%, #191a2a 100%);
+    border-radius: 20px;
+    margin-bottom: 50px;
+  }
+  
+  .stats-title {
+    font-size: 48px;
+    font-weight: 800;
+    color: #00ffea;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 30px;
+  }
+  
+  .stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .stat-box {
+    flex: 1 1 200px;
+    background: #1a1a2a;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+  }
+  
+  .stat-box:hover {
+    transform: translateY(-5px) scale(1.02);
+  }
+  
+  .stat-box h3 {
+    font-size: 28px;
+    color: #00ffea;
+    margin-bottom: 10px;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .stat-box p {
+    font-size: 16px;
+    color: #ccc;
+    line-height: 1.6;
+  }

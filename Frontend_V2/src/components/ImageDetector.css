@@ -1,0 +1,114 @@
+/* FONTS */
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap");
+
+.detector-wrapper {
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Rajdhani", sans-serif;
+}
+
+/* HEADER */
+.detector-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.detector-title {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #00e0ff;
+  text-transform: uppercase;
+}
+
+.detector-subtitle {
+  font-size: 18px;
+  color: #b4b4b4;
+  margin-top: 8px;
+}
+
+/* CARD */
+.detector-card {
+  width: 85%;
+  max-width: 700px;
+  background: #0c0f14;
+  border: 1px solid #1c1f26;
+  border-radius: 12px;
+  padding: 35px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.06);
+}
+
+/* FORM */
+.detector-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.upload-label {
+  position: relative;
+  display: inline-block;
+  background: #11151c;
+  border: 1px solid #20252f;
+  padding: 15px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #d0d0d0;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: 0.25s ease;
+}
+
+.upload-label:hover {
+  border-color: #00e0ff;
+  color: #00e0ff;
+}
+
+.upload-label input {
+  display: none;
+}
+
+.detect-btn {
+  background: #00e0ff;
+  padding: 14px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0c0f14;
+  letter-spacing: 1px;
+  transition: 0.25s ease;
+}
+
+.detect-btn:hover {
+  background: #00c4dd;
+}
+
+/* PREVIEW SECTION */
+.preview-box {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.preview-box img {
+  max-width: 70%;
+  border-radius: 10px;
+  border: 1px solid #222;
+  transition: transform 0.3s ease;
+}
+
+.preview-box img:hover {
+  transform: scale(1.02);
+}
+
+.result-output {
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #e0e0e0;
+}

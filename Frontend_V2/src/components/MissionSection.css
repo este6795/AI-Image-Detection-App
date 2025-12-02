@@ -1,0 +1,23 @@
+.mission-section {
+    padding: 40px 20px;
+    border-left: 5px solid #ff4caf;
+    background: linear-gradient(135deg, #111 0%, #1e1e2f 100%);
+    border-radius: 20px;
+    margin-bottom: 50px;
+    margin-top: 140px;
+  }
+  
+  .mission-title {
+    font-size: 48px;
+    font-weight: 800;
+    color: #ff4caf;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 20px;
+  }
+  
+  .mission-desc {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #ddd;
+    letter-spacing: 0.5px;
+  }
