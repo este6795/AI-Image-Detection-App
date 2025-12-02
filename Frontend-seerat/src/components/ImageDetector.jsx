@@ -21,13 +21,25 @@ const ImageDetector = () => {
 
     setLoading(true);
     try {
+      console.log("[FRONTEND] Sending image to http://localhost:5000/detect");
       const res = await axios.post("http://localhost:5000/detect", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      setResult(res.data.result);
+      console.log("[FRONTEND] Response received:", res.data);
+      
+      if (res.data.success && res.data.result) {
+        console.log("[FRONTEND] Setting result:", res.data.result);
+        setResult(res.data.result);
+      } else {
+        console.error("[FRONTEND] Invalid response structure:", res.data);
+        alert("Error: Invalid response from server.");
+      }
     } catch (err) {
-      alert("Error analyzing image.");
-      console.log(err);
+      console.error("[FRONTEND] Error analyzing image:");
+      console.error("Status:", err.response?.status);
+      console.error("Data:", err.response?.data);
+      console.error("Message:", err.message);
+      alert("Error analyzing image: " + (err.response?.data?.message || err.message));
     } finally {
       setLoading(false);
     }
