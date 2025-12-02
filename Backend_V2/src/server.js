@@ -1,18 +1,18 @@
+import './loadEnv.js';
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import "./db.js"; // Database connection
+import "./db.js"; // Database connection (dotenv is loaded above)
 
 import detectRoutes from "./routes/detect.js";
 import resultsRoutes from "./routes/results.js";
 import authRoutes from "./routes/auth.js"; // optional if you included auth
 
-dotenv.config();
-
 const app = express();
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+console.log(`[SERVER] Using FRONTEND_URL=${FRONTEND_URL}`);
 app.use(cors({
-  origin: "http://localhost:5000",
+  origin: FRONTEND_URL,
   credentials: true,
 }));
 app.use(express.json());
