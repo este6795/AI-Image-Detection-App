@@ -4,14 +4,19 @@ import axios from "axios";
 const ShowHistory = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
+  const BACKEND_URL = "http://localhost:5000";
 
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/results");
+        console.log("[HISTORY] Fetching results from", BACKEND_URL + "/api/results");
+        const res = await axios.get(BACKEND_URL + "/api/results");
+        console.log("[HISTORY] Received", res.data.length, "results");
         setHistory(res.data);
       } catch (err) {
-        console.error("Error fetching history:", err);
+        console.error("[HISTORY] Error fetching results:", err);
+        console.error("[HISTORY] Status:", err.response?.status);
+        console.error("[HISTORY] Data:", err.response?.data);
       } finally {
         setLoading(false);
       }
@@ -48,8 +53,10 @@ const ShowHistory = () => {
               }}
             >
               <img
-                src={`http://localhost:5000/api/images/${item._id}`}
+                src={`${BACKEND_URL}/api/results/image/${item._id}`}
                 alt="Detected"
+                onLoad={() => console.log("[HISTORY] Image loaded:", item._id)}
+                onError={(e) => console.error("[HISTORY] Image failed to load:", item._id, e)}
                 style={{
                   width: "150px",
                   borderRadius: "8px",
