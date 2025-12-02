@@ -4,12 +4,14 @@ import fs from "fs";
 import FormData from "form-data";
 import upload from "../middleware/upload.js";
 import ImageResult from "../models/ImageResults.js";
+import { deleteTempFile } from "../models/cleanup.js";
 
 const router = express.Router();
 
 router.post("/", upload.single("image"), async (req, res) => {
+  const filePath = req.file?.path;
+  if (!filePath) return res.status(400).json({ success: false, error: "No image uploaded" });
   try {
-    const filePath = req.file.path;
     const fileData = fs.readFileSync(filePath);
 
     const formData = new FormData();
@@ -33,12 +35,16 @@ router.post("/", upload.single("image"), async (req, res) => {
       },
     });
 
-    fs.unlinkSync(filePath);
-
     res.json({ success: true, result: response.data });
   } catch (error) {
     console.error("[ERROR] Detection:", error);
-    res.status(500).json({ success: false });
+    res.status(500).json({ success: false, message: error?.message || "Error during detection" });
+  } finally {
+    try {
+      if (filePath) deleteTempFile(filePath);
+    } catch (e) {
+      console.error('[CLEANUP] Failed to delete temp file', e);
+    }
   }
 });
 
