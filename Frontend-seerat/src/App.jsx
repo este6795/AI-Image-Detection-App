@@ -13,14 +13,17 @@ const App = () => {
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   // Check if user is already logged in on mount
   useEffect(() => {
     const authenticated = localStorage.getItem("isAuthenticated") === "true";
     const email = localStorage.getItem("userEmail");
+    const admin = localStorage.getItem("isAdmin") === "true";
     if (authenticated && email) {
       setIsAuthenticated(true);
       setUserEmail(email);
+      setIsAdmin(admin);
     }
   }, []);
 
@@ -28,17 +31,21 @@ const App = () => {
     setAuthModalOpen(true);
   };
 
-  const handleLoginSuccess = (email) => {
+  const handleLoginSuccess = (email, isAdmin = false) => {
     setIsAuthenticated(true);
     setUserEmail(email);
+    setIsAdmin(isAdmin);
+    localStorage.setItem("isAdmin", isAdmin ? "true" : "false");
     setShowLanding(false);
   };
 
   const handleLogout = () => {
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("userEmail");
+    localStorage.removeItem("isAdmin");
     setIsAuthenticated(false);
     setUserEmail("");
+    setIsAdmin(false);
     setShowLanding(true);
     
     // Call logout endpoint to clear server-side cookie
@@ -74,7 +81,9 @@ const App = () => {
                 Quickly analyze any image to determine if it was AI generated or naturally captured.
               </p>
               {isAuthenticated && (
-                <p className="user-info">Welcome, {userEmail}</p>
+                <p className="user-info">
+                  Welcome, {userEmail} {isAdmin && "👑 (ADMIN)"}
+                </p>
               )}
             </div>
           </section>
@@ -102,7 +111,7 @@ const App = () => {
 
             {/* Upload / Detect Section */}
             <main className="content">
-              {showHistory ? <ShowHistory /> : <ImageDetector />}
+              {showHistory ? <ShowHistory isAdmin={isAdmin} /> : <ImageDetector />}
             </main>
           </div>
         </>

@@ -2,6 +2,7 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/user.js';
+import authMiddleware from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -64,7 +65,7 @@ router.post("/login", async (req, res) => {
       sameSite: "strict",
     });
 
-    res.json({ success: true });
+    res.json({ success: true, isAdmin: foundUser.isAdmin });
   } catch (error) {
     console.error('[AUTH] Login error:', error);
     res.status(500).json({ error: "Internal server error" });
@@ -75,6 +76,53 @@ router.post("/login", async (req, res) => {
 router.post("/logout", (req, res) => {
   res.clearCookie("token");
   res.json({ success: true });
+});
+
+// Get current user info
+router.get("/me", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json({ 
+      id: user._id, 
+      email: user.email, 
+      isAdmin: user.isAdmin 
+    });
+  } catch (error) {
+    console.error('[AUTH] Error fetching user:', error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// Admin route to make a user an admin (requires admin status)
+router.post("/set-admin", authMiddleware, async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.userId);
+    if (!currentUser || !currentUser.isAdmin) {
+      return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
+    }
+
+    const targetUser = await User.findOne({ email });
+    if (!targetUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    targetUser.isAdmin = true;
+    await targetUser.save();
+    console.log('[AUTH] User', email, 'promoted to admin by', currentUser.email);
+
+    res.json({ success: true, message: `${email} is now an admin` });
+  } catch (error) {
+    console.error('[AUTH] Error setting admin:', error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 export default router;

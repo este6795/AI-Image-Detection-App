@@ -1,15 +1,27 @@
 import express from "express";
 import ImageResult from "../models/ImageResults.js";
+import User from "../models/user.js";
 import authMiddleware from "../middleware/auth.js";
 
 const router = express.Router();
 
-// Fetch results for authenticated user
+// Fetch results for authenticated user (or all if admin)
 router.get("/", authMiddleware, async (req, res) => {
   try {
-    console.log("[RESULTS] Fetching results for user:", req.userId);
-    const results = await ImageResult.find({ userId: req.userId }).sort({ createdAt: -1 });
-    console.log("[RESULTS] Found", results.length, "results for user");
+    const user = await User.findById(req.userId);
+    console.log("[RESULTS] Fetching results for user:", req.userId, "isAdmin:", user?.isAdmin);
+    
+    let results;
+    if (user?.isAdmin) {
+      // Admins see all results
+      results = await ImageResult.find().sort({ createdAt: -1 }).populate('userId', 'email');
+      console.log("[RESULTS] Admin view: Found", results.length, "total results");
+    } else {
+      // Regular users see only their results
+      results = await ImageResult.find({ userId: req.userId }).sort({ createdAt: -1 });
+      console.log("[RESULTS] User view: Found", results.length, "results for user");
+    }
+    
     res.json(results);
   } catch (err) {
     console.error("[RESULTS] Error fetching results:", err);
@@ -28,8 +40,9 @@ router.get("/image/:id", authMiddleware, async (req, res) => {
       return res.status(404).json({ message: "Image not found" });
     }
 
-    // Verify the image belongs to the authenticated user
-    if (img.userId.toString() !== req.userId) {
+    // Check authorization
+    const user = await User.findById(req.userId);
+    if (!user?.isAdmin && img.userId.toString() !== req.userId) {
       console.error("[RESULTS] User not authorized to access this image");
       return res.status(403).json({ message: "Not authorized to access this image" });
     }
@@ -41,6 +54,27 @@ router.get("/image/:id", authMiddleware, async (req, res) => {
   } catch (err) {
     console.error("[RESULTS] Error retrieving image:", err);
     res.status(500).json({ message: "Error retrieving image", error: err.message });
+  }
+});
+
+// Delete a result (admin only)
+router.delete("/:id", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId);
+    if (!user?.isAdmin) {
+      return res.status(403).json({ error: "Only admins can delete results" });
+    }
+
+    const result = await ImageResult.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({ error: "Result not found" });
+    }
+
+    console.log("[RESULTS] Result deleted by admin:", user.email, "- Result ID:", req.params.id);
+    res.json({ success: true, message: "Result deleted successfully" });
+  } catch (err) {
+    console.error("[RESULTS] Error deleting result:", err);
+    res.status(500).json({ message: "Error deleting result", error: err.message });
   }
 });
 

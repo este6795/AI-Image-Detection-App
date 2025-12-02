@@ -1,0 +1,69 @@
+/* ShowHistory Styles */
+.history-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.history-title {
+  font-size: 24px;
+  color: #00d4ff;
+  margin-bottom: 20px;
+}
+
+.history-item {
+  margin-bottom: 20px;
+  background-color: #1e1e1eff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.history-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 150, 255, 0.2);
+}
+
+.history-image {
+  width: 150px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.history-filename {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.history-result {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.history-user-info {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.delete-btn {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #ff006e 0%, #ff4757 100%);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 0, 110, 0.3);
+}
+
+.no-history {
+  color: #888;
+  font-size: 16px;
+}

@@ -46,7 +46,9 @@ const AuthModal = ({ isOpen, onClose, onLoginSuccess }) => {
         // Store user info in localStorage
         localStorage.setItem("userEmail", email);
         localStorage.setItem("isAuthenticated", "true");
-        onLoginSuccess(email);
+        const isAdmin = res.data.isAdmin || false;
+        localStorage.setItem("isAdmin", isAdmin ? "true" : "false");
+        onLoginSuccess(email, isAdmin);
         handleClose();
       }
     } catch (err) {
