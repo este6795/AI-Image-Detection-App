@@ -10,7 +10,7 @@ import resultsRoutes from "./routes/results.js";
 import authRoutes from "./routes/auth.js"; // optional if you included auth
 
 const app = express();
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 console.log(`[SERVER] Using FRONTEND_URL=${FRONTEND_URL}`);
 app.use(cors({
   origin: FRONTEND_URL,
