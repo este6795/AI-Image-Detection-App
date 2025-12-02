@@ -1,0 +1,24 @@
+.intro-section {
+    padding: 40px 20px;
+    border-left: 5px solid #4cafef;
+    background: linear-gradient(135deg, #0f111b 0%, #1a1c2b 100%);
+    border-radius: 20px;
+    margin-top:50px;
+    margin-bottom: 50px;
+  }
+  
+  .intro-title {
+    font-size: 60px;
+    font-weight: 900;
+    color: #4cafef;
+    line-height: 1.2;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 20px;
+  }
+  
+  .intro-desc {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #cfcfcf;
+    letter-spacing: 0.5px;
+  }
