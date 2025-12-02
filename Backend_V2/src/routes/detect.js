@@ -3,12 +3,13 @@ import axios from "axios";
 import fs from "fs";
 import FormData from "form-data";
 import upload from "../middleware/upload.js";
+import authMiddleware from "../middleware/auth.js";
 import ImageResult from "../models/ImageResults.js";
 import { deleteTempFile } from "../models/cleanup.js";
 
 const router = express.Router();
 
-router.post("/", upload.single("image"), async (req, res) => {
+router.post("/", authMiddleware, upload.single("image"), async (req, res) => {
   const filePath = req.file?.path;
   if (!filePath) return res.status(400).json({ success: false, error: "No image uploaded" });
   
@@ -40,6 +41,7 @@ router.post("/", upload.single("image"), async (req, res) => {
 
     // Save to MongoDB (using new + save, matching the working version)
     const newImage = new ImageResult({
+      userId: req.userId,
       filename: req.file.originalname,
       result: response.data,
       image: {

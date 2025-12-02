@@ -24,6 +24,7 @@ const ImageDetector = () => {
       console.log("[FRONTEND] Sending image to http://localhost:5000/detect");
       const res = await axios.post("http://localhost:5000/detect", formData, {
         headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true,
       });
       console.log("[FRONTEND] Response received:", res.data);
       

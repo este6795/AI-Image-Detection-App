@@ -10,7 +10,9 @@ const ShowHistory = () => {
     const fetchHistory = async () => {
       try {
         console.log("[HISTORY] Fetching results from", BACKEND_URL + "/api/results");
-        const res = await axios.get(BACKEND_URL + "/api/results");
+        const res = await axios.get(BACKEND_URL + "/api/results", {
+          withCredentials: true,
+        });
         console.log("[HISTORY] Received", res.data.length, "results");
         setHistory(res.data);
       } catch (err) {

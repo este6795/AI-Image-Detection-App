@@ -13,7 +13,24 @@ router.post("/signup", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ email, password: hashedPassword });
     await newUser.save();
-    res.status(201).json({ message: "User created successfully" });
+    console.log('[AUTH] New user created with ID:', newUser._id);
+    
+    // Issue JWT token immediately after signup
+    const JWT_SECRET = process.env.JWT_SECRET;
+    if (!JWT_SECRET) console.warn('[AUTH] Warning: JWT_SECRET is not set in environment variables');
+    
+    const token = jwt.sign({ id: newUser._id }, JWT_SECRET || 'dev-secret', {
+      expiresIn: "1d",
+    });
+    
+    console.log('[AUTH] JWT token issued for new user:', newUser._id);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+    });
+    
+    res.status(201).json({ success: true, message: "User created successfully" });
   } catch (error) {
     console.error('[AUTH] Signup error:', error);
     res.status(400).json({ error: "Email already in use or invalid data" });
@@ -40,6 +57,7 @@ router.post("/login", async (req, res) => {
       expiresIn: "1d",
     });
 
+    console.log('[AUTH] JWT token issued for user login:', foundUser._id);
     res.cookie("token", token, {
       httpOnly: true,
       secure: false,
