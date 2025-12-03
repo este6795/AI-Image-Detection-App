@@ -6,6 +6,9 @@ import ShowHistory from "./components/ShowHistory";
 import LandingPage from "./components/LandingPage";
 import AuthModal from "./components/AuthModal";
 import "./App.css";
+import AIQuizSection from "./components/AIQuizSection";
+import StepsSection from "./components/Stepssection";
+
 
 const App = () => {
   const [showLanding, setShowLanding] = useState(true);
@@ -113,6 +116,8 @@ const App = () => {
             <main className="content">
               {showHistory ? <ShowHistory isAdmin={isAdmin} /> : <ImageDetector />}
             </main>
+            <StepsSection />
+            <AIQuizSection /> 
           </div>
         </>
       )}

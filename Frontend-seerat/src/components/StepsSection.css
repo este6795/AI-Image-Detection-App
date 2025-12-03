@@ -1,0 +1,50 @@
+.steps-wrapper {
+    width: 100%;
+    padding: 50px 20px;
+    text-align: center;
+    font-family: "Rajdhani", sans-serif;
+    background: #0c0f14;
+    color: #e0e0e0;
+  }
+  
+  .steps-title {
+    font-size: 42px;
+    color: #00ff90;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+  }
+  
+  .steps-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .step-card {
+    background: #11151c;
+    border: 1px solid #1c1f26;
+    border-radius: 12px;
+    padding: 25px;
+    max-width: 250px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.06);
+    transition: transform 0.3s ease;
+  }
+  
+  .step-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .step-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #00ff90;
+    margin-bottom: 10px;
+  }
+  
+  .step-card-desc {
+    font-size: 16px;
+    color: #b4b4b4;
+    line-height: 1.4;
+  }
