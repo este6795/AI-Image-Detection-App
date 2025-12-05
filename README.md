@@ -224,6 +224,9 @@ Key endpoints:
 - Kanban Whiteboard: https://www.canva.com/design/DAG33HIYG_4/hgzuwn6yQNpGs0tHIa4EmA/view?utm_content=DAG33HIYG_[4&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h39ce4a4fcc
 - Basic Wireframes: https://lucid.app/lucidchart/de453758-ea13-458b-bfc3-ddf3424c146d/edit?viewport_loc=-1583%2C-954%2C7060%2C3490%2CuP1BopAARZY8&invitationId=inv_6bc9c881-b513-4f19-9130-36bba7f567b9
 
+## Showcase/Live Demo
+You can view a live demo of the working version of this web application in the files or using this link: DectectAI_Showcase.mp4
+
 ## Notes
 
 - Sightengine API credit: https://sightengine.com/
