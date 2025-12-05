@@ -225,7 +225,7 @@ Key endpoints:
 - Basic Wireframes: [Wire Frame](https://lucid.app/lucidchart/de453758-ea13-458b-bfc3-ddf3424c146d/edit?viewport_loc=-1583%2C-954%2C7060%2C3490%2CuP1BopAARZY8&invitationId=inv_6bc9c881-b513-4f19-9130-36bba7f567b9)
 
 ## Showcase/Live Demo
-You can view a live demo of the working version of this web application in the files or using this link: [Live Demo](Live%20Demo/DectectAI_Showcase.mp4) 
+You can view a live demo of the working version of this web application in the files or using this link: [Live Demo](Live%20Demo/DectectAI_Showcase.mp4)  
 Other link to video: [Backup Link](https://vimeo.com/1143960306?share=copy&fl=sv&fe=ci)
 
 ## Notes
