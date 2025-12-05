@@ -218,6 +218,12 @@ Key endpoints:
 - Input validation on all endpoints
 - Authorization checks on protected routes
 
+## Project Artifacts
+- Showcase presentation: https://bearsunco-my.sharepoint.com/:p:/g/personal/sand4927_bears_unco_edu/ET0jwIOIj9dAhOn4ZzZeaxgBcfIegghQBMzLw-EOu8_yHg?e=5aH8z8
+- Project code explanation presentation: https://bearsunco-my.sharepoint.com/:p:/g/personal/este6795_bears_unco_edu/EUMs4sUpYN5Du8SYJtQjy4gB4bP-enkhvNbAyQW6KLP0cw?e=9FxZNw
+- Kanban Whiteboard: https://www.canva.com/design/DAG33HIYG_4/hgzuwn6yQNpGs0tHIa4EmA/view?utm_content=DAG33HIYG_[4&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h39ce4a4fcc
+- Basic Wireframes: https://lucid.app/lucidchart/de453758-ea13-458b-bfc3-ddf3424c146d/edit?viewport_loc=-1583%2C-954%2C7060%2C3490%2CuP1BopAARZY8&invitationId=inv_6bc9c881-b513-4f19-9130-36bba7f567b9
+
 ## Notes
 
 - Sightengine API credit: https://sightengine.com/
